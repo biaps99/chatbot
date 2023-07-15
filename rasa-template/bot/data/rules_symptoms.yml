@@ -1,0 +1,17 @@
+version: "3.0"
+rules:
+  - rule: Activate Symptom Form
+    steps:
+      - intent: symptoms_check
+      - action: symptoms_form
+      - active_loop: symptoms_form
+
+  - rule: Submit Symptoms Form
+    condition:
+      - active_loop: symptoms_form
+    steps:
+      - action: symptoms_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_final_symptoms

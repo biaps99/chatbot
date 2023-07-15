@@ -1,0 +1,72 @@
+{
+  "weight": [
+    "https://www.diabetes.org.uk/guide-to-diabetes/enjoy-food/eating-with-diabetes/whats-your-healthy-weight/lose-weight?fbclid=IwAR1VzxAtV38RQBKFUXesHmgdUmenX80LQUCrsJ0DQceb9BgBSdteZlFHDT8",
+    "https://medbroadcast.com/channel/diabetes/diabetes-managing-risks/the-importance-of-weight-management-in-diabetes",
+    "https://www.mytype1diabetes.nhs.uk/resources/internal/the-importance-of-weight-management/",
+    "https://www.ndss.com.au/living-with-diabetes/health-management/nutrition/weight-management/"
+  ],
+  "blood pressure": [
+    "https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/blood-pressure",
+    "https://www.hopkinsmedicine.org/health/conditions-and-diseases/diabetes/diabetes-and-high-blood-pressure",
+    "https://www.medicalnewstoday.com/articles/317220#identification",
+    "https://www.canopyhealth.com/understanding-the-relationship-between-high-blood-pressure-and-type-2-diabetes/"
+  ],
+  "glucose levels": [
+    "https://www.cdc.gov/diabetes/managing/managing-blood-sugar/bloodglucosemonitoring.html?fbclid=IwAR1dfWHKAJ4YKOFqMJf8j695QDM0B9QlN1lPsMGpHFj8fK4DCRPHVviZb4Y",
+    "https://www.onetouch.com/about-diabetes/managing-diabetes/why-monitor-blood-glucose",
+    "https://my.clevelandclinic.org/health/diseases/9815-hyperglycemia-high-blood-sugar",
+    "https://palliance.eu/resource/blog-news/why-is-blood-glucose-monitoring-important/"
+  ],
+  "physical exercise": [
+    "https://www.health.harvard.edu/staying-healthy/the-importance-of-exercise-when-you-have-diabetes",
+    "https://diabetesjournals.org/care/article/39/11/2065/37249/Physical-Activity-Exercise-and-Diabetes-A-Position",
+    "https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/exercise",
+    "https://news.christianacare.org/2012/11/why-is-exercise-so-important-for-people-with-diabetes/"
+  ],
+  "nutrition": [
+    "https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/diabetes-and-healthy-eating",
+    "https://www.diabetes.org.uk/guide-to-diabetes/enjoy-food/eating-with-diabetes/what-is-a-healthy-balanced-diet",
+    "https://www.winchesterhospital.org/health-library/article?id=889606",
+    "https://www.niddk.nih.gov/health-information/diabetes/overview/diet-eating-physical-activity"
+  ],
+  "high stress": [
+    "https://www.diabetes.org.uk/guide-to-diabetes/emotions/stress",
+    "https://my.clevelandclinic.org/health/articles/14891-diabetes-stress--depression"
+  ],
+  "lack of sleep": [
+    "https://www.sleepfoundation.org/physical-health/sleep-and-blood-glucose-levels",
+    "https://www.sleepfoundation.org/physical-health/lack-of-sleep-and-diabetes"
+  ],
+  "fatigue": [
+    "https://www.medicalnewstoday.com/articles/323398",
+    "https://www.diabetes.co.uk/tiredness-and-diabetes.html"
+  ],
+  "sudden weight loss": [
+    "https://health.clevelandclinic.org/what-you-should-know-about-unexplained-weight-loss-and-diabetes/",
+    "https://www.diabetes.co.uk/symptoms/unexplained-weight-loss.html"
+  ],
+  "increased urination": [
+    "https://www.healthline.com/health/frequent-urination-diabetes",
+    "https://www.diabetes.co.uk/symptoms/polyuria.html"
+  ],
+  "increased thirst": [
+    "https://www.diabetes.co.uk/symptoms/polydipsia.html",
+    "https://www.medicalnewstoday.com/articles/diabetes-thirst"
+  ],
+  "increased hunger": [
+    "https://www.verywellhealth.com/polyphagia-5114624",
+    "https://www.express.co.uk/life-style/health/1583556/diabetes-type-2-high-blood-sugar-symptoms-signs-polyphagia"
+  ],
+  "blurry vision": [
+    "https://www.webmd.com/diabetes/diabetes-blurred-vision",
+    "https://www.hopkinsmedicine.org/health/conditions-and-diseases/diabetes-and-your-eyes-what-you-need-to-know"
+  ],
+  "nausea": [
+    "https://www.medicalnewstoday.com/articles/324963",
+    "https://www.healthline.com/health/diabetes/is-diabetes-causing-my-nausea"
+  ],
+  "low blood sugar": [
+    "https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/",
+    "https://www.mayoclinic.org/diseases-conditions/diabetic-hypoglycemia/symptoms-causes/syc-20371525"
+  ]
+}

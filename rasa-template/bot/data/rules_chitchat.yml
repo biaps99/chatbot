@@ -1,0 +1,28 @@
+version: "3.0"
+rules:
+  - rule: Star command in Telegram
+    steps:
+      - intent: start
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+
+  - rule: Ask to rephrase the message if does not understand.
+    steps:
+      - intent: nlu_fallback
+      - action: utter_fallback
+      - action: utter_remind_help
+
+  - rule: Remember what the bot can do
+    steps:
+      - intent: help
+      - action: action_help
+
+  - rule: User says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: User says thank you
+    steps:
+      - intent: thankyou
+      - action: utter_noworries

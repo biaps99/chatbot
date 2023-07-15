@@ -1,0 +1,32 @@
+version: "3.0"
+rules:
+  - rule: Show information about the medication reminder
+    steps:
+      - intent: show_medication_reminder
+      - action: action_react_to_medication_reminder
+
+  - rule: Activate Medication Form
+    steps:
+      - intent: remind_medication
+      - action: medication_form
+      - active_loop: medication_form
+
+  - rule: Submit Medication Form
+    condition:
+      - active_loop: medication_form
+    steps:
+      - action: medication_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_set_reminder_info
+
+  - rule: User wants to cancel a medication reminder
+    steps:
+      - intent: cancel_medication_reminder
+      - action: action_show_medication_reminders
+
+  - rule: Utter reminders actions
+    steps:
+      - intent: reminders
+      - action: utter_reminders

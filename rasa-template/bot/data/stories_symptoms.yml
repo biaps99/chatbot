@@ -1,0 +1,45 @@
+version: "3.0"
+stories:
+  - story: interactive_story_1
+    steps:
+      - intent: symptoms_check
+      - action: symptoms_form
+      - active_loop: symptoms_form
+      - slot_was_set:
+          - requested_slot: number_of_symptoms
+      - slot_was_set:
+          - number_of_symptoms: 2 symptoms
+      - slot_was_set:
+          - requested_slot: symptom
+      - slot_was_set:
+          - symptom: Increased Thirst
+      - slot_was_set:
+          - requested_slot: intensity
+      - slot_was_set:
+          - intensity: 3 intensity
+      - slot_was_set:
+          - requested_slot: duration
+      - slot_was_set:
+          - duration: 20 minutes
+      - slot_was_set:
+          - duration: null
+      - slot_was_set:
+          - symptom: null
+      - slot_was_set:
+          - intensity: null
+      - slot_was_set:
+          - requested_slot: symptom
+      - slot_was_set:
+          - symptom: Fatigue/Tiredness
+      - slot_was_set:
+          - requested_slot: intensity
+      - slot_was_set:
+          - intensity: 8 intensity
+      - slot_was_set:
+          - requested_slot: duration
+      - slot_was_set:
+          - duration: 10 minutes
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_final_symptoms

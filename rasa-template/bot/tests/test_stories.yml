@@ -1,0 +1,286 @@
+version: "3.0"
+stories:
+  - story: remember what the bot can do
+    steps:
+      - user: |
+          Help
+        intent: help
+      - action: action_help
+
+  - story: interactive_story_7
+    steps:
+      - user: |
+          hello
+        intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+      - user: |
+          Don't need any help.
+        intent: refuse_help
+      - action: utter_accept_refusal
+
+  - story: user asks about weight
+    steps:
+      - user: |
+          How can I [lose weight](topic)?
+        intent: ask_about_weight
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - story: user asks about glucose
+    steps:
+      - user: |
+          What is [glucose](topic)?
+        intent: ask_about_glucose
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - story: user asks about nutrition
+    steps:
+      - user: |
+          How should my [diet](topic) look like?
+        intent: ask_about_nutrition
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - user: |
+          No, enough of learning.
+        intent: refuse_learn_more
+      - action: utter_accept_refusal
+      - user: |
+          bye
+        intent: goodbye
+      - action: utter_goodbye
+
+  - story: user asks about exercise
+    steps:
+      - user: |
+          Why is [exercise](topic) important for diabetics?
+        intent: ask_about_exercise
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - user: |
+          Yes, I wanna learn more.
+        intent: say_yes_to_learn_more
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://news.christianacare.org/2012/11/why-is-exercise-so-important-for-people-with-diabetes/
+      - user: |
+          Appreciate it.
+        intent: thankyou
+      - action: utter_noworries
+
+  - story: user asks about blood pressure
+    steps:
+      - user: |
+          How often do I need to get my [blood pressure](topic) checked?
+        intent: ask_about_blood_pressure
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - story: chitchat - user asks about a restaurant
+    steps:
+      - user: |
+          hi
+        intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+      - user: |
+          im looking for a restaurant
+        intent: ask_restaurant
+      - action: action_chitchat
+
+  - story: chitchat - user asks about the weather at the beginning of a questionnaire
+    steps:
+      - user: |
+          show questionnaire
+        intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - user: |
+          Yes, let's answer
+        intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - user: |
+          How's the weather?
+        intent: ask_weather
+      - action: action_chitchat
+      - action: utter_stop
+      - user: |
+          Yes, I want to stop the questionnaire
+        intent: confirm_stop
+      - action: action_deactivate_loop
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+      - user: |
+          thanks
+        intent: thankyou
+      - action: utter_noworries
+
+  - story: chitchat - user asks about the bot is doing in the middle of a questionnaire, but continues it
+    steps:
+      - user: |
+          show questionnaire
+        intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - user: |
+          Yes, let's answer
+        intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - user: |
+          How are you doin?
+        intent: ask_howdoing
+      - action: action_chitchat
+      - action: utter_stop
+      - user: |
+          No, I want to continue the questionnaire
+        intent: dismiss_stop
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+      - action: action_listen
+      - slot_was_set:
+          - alarming_metrics:
+              - lack of sleep
+              - fatigue
+      - action: action_show_article_for_alarming_metrics
+
+  - story: interactive_story_1
+    steps:
+      - user: |
+          hello
+        intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+      - user: |
+          what types of articles do you have
+        intent: view_article_types
+      - action: utter_show_article_topics
+      - user: |
+          show me an article about [blood pressure]{"entity": "topic"}
+        intent: choose_article_topic
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/doctor-visits/screening-tests/get-your-blood-pressure-checked
+      - user: |
+          already viewed that article, show a different one
+        intent: already_viewed_article
+      - action: action_show_different_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/doctor-visits/talking-doctor/medicines-prevent-heart-attack-and-stroke-questions-doctor
+
+  - story: interactive_story_2
+    steps:
+      - user: |
+          show me an article about [weight loss]{"entity": "topic"}
+        intent: choose_article_topic
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/doctor-visits/screening-tests/get-your-blood-pressure-checked
+      - user: |
+          thanks
+        intent: thankyou
+      - action: utter_noworries
+      - user: |
+          goodbye
+        intent: goodbye
+      - action: utter_goodbye
+
+  - story: interactive_story_6
+    steps:
+      - user: |
+          help me in my tasks
+        intent: ask_help_in_tasks
+      - action: action_try_to_help
+      - user: |
+          show types of articles you provide.
+        intent: view_article_types
+      - action: utter_show_article_topics
+      - user: |
+          show me an article about [diet]{"entity": "topic"}
+        intent: choose_article_topic
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://www.winchesterhospital.org/health-library/article?id=889606
+      - user: |
+          thanks
+        intent: thankyou
+      - action: utter_noworries
+
+  - story: user wants to check progress
+    steps:
+      - user: |
+          Show me my tasks
+        intent: check_progress
+      - action: action_show_daily_goals
+
+  - story: user deny health check
+    steps:
+      - user: |
+          show questionnaire
+        intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - user: |
+          No, leave it for later.
+        intent: refuse_health_questionnaire
+      - action: action_set_reminder
+
+  - story: create a medication reminder
+    steps:
+      - user: |
+          create medication reminder
+        intent: remind_medication
+      - action: medication_form
+      - active_loop: medication_form
+      - slot_was_set:
+          - requested_slot: medicine
+      - slot_was_set:
+          - medicine: metaformin
+      - slot_was_set:
+          - requested_slot: dose
+      - slot_was_set:
+          - dose: 10 mg
+      - slot_was_set:
+          - requested_slot: permanent
+      - slot_was_set:
+          - permanent: True
+      - slot_was_set:
+          - requested_slot: how_many_times
+      - slot_was_set:
+          - how_many_times: 1 time
+      - slot_was_set:
+          - requested_slot: schedule
+      - slot_was_set:
+          - schedule: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_set_reminder_info
+
+  - story: cancel a medication reminder
+    steps:
+      - user: |
+          cancel medication reminder
+        intent: cancel_medication_reminder
+      - action: action_show_medication_reminders
+      - user: |
+          cancel [metaformin]{"entity": "medicine"} reminder.
+        intent: confirm_cancel_medication_reminder
+      - action: action_forget_medication_reminder

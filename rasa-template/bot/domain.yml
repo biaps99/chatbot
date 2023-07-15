@@ -1,0 +1,612 @@
+version: "3.0"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - stop
+  - confirm_stop
+  - dismiss_stop
+  - help
+  - ask_weather
+  - ask_builder
+  - ask_howdoing
+  - ask_howold
+  - ask_restaurant
+  - ask_time
+  - ask_wherefrom
+  - ask_whoami
+  - handleinsult
+  - telljoke
+  - ask_whatismyname
+  - ask_languagesbot
+  - ask_name
+  - show_wellness_check
+  - remind_medication
+  - answer_medicine
+  - answer_dose
+  - answer_schedule
+  - show_medication_reminder
+  - confirm_permanent
+  - confirm_temporary
+  - answer_how_many_times
+  - answer_how_many_days
+  - say_yes_to_health_questionnaire
+  - answer_wellness_check
+  - goodbye
+  - say_yes_to_learn_more
+  - refuse_help
+  - refuse_learn_more
+  - refuse_health_questionnaire
+  - thankyou
+  - choose_article_topic
+  - view_article_types
+  - ask_help_in_tasks
+  - ask_about_exercise
+  - greet
+  - already_viewed_article
+  - ask_about_blood_pressure
+  - check_progress
+  - ask_about_glucose
+  - ask_about_nutrition
+  - ask_about_weight
+  - willDo
+  - doHere
+  - input_some_measurement
+  - number_measurements
+  - glucose_update
+  - weight_update
+  - blood_update
+  - start
+  - cancel_medication_reminder
+  - confirm_cancel_medication_reminder
+  - reminders
+  - answer_number_of_symptoms
+  - answer_symptom
+  - symptoms_check
+  - answer_duration
+  - answer_intensity
+
+entities:
+  - task
+  - topic
+  - medicine
+  - dose
+  - permanent
+  - schedule
+  - how_many_times
+  - how_many_days
+  - number_of_measurements
+  - measurement
+  - update
+  - health_form_answer
+  - number_of_symptoms
+  - symptom
+  - duration
+  - intensity
+
+slots:
+  medicine:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: medicine
+        intent: answer_medicine
+        not_intent:
+          [show_medication_reminder, confirm_cancel_medication_reminder]
+
+  dose:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_dose
+        conditions:
+          - active_loop: medication_form
+        requested_slot: dose
+        entity: dose
+
+  schedule:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_schedule
+        conditions:
+          - active_loop: medication_form
+        requested_slot: schedule
+        entity: schedule
+
+  permanent:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        conditions:
+          - active_loop: medication_form
+        requested_slot: permanent
+        entity: permanent
+
+  how_many_times:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_how_many_times
+        conditions:
+          - active_loop: medication_form
+        requested_slot: how_many_times
+        entity: how_many_times
+
+  how_many_days:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_how_many_days
+        conditions:
+          - active_loop: medication_form
+        requested_slot: how_many_days
+        entity: how_many_days
+
+  topic:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: topic
+
+  article_url:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  task:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: task
+
+  health_form_answer:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+        not_intent: answer_wellness_check
+        conditions:
+          - active_loop: health_form
+        requested_slot: health_form_answer
+
+  alarming_metrics:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  number_of_measurements:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        intent: number_measurements
+        entity: number_of_measurements
+        conditions:
+          - active_loop: measurementform
+        requested_slot: number_of_measurements
+
+  measurement:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: measurement
+        conditions:
+          - active_loop: measurementform
+        requested_slot: measurement
+
+  update:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        intent: [weight_update, glucose_update, blood_update]
+        entity: update
+
+  number_of_symptoms:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_number_of_symptoms
+        conditions:
+          - active_loop: symptoms_form
+        requested_slot: number_of_symptoms
+        entity: number_of_symptoms
+
+  symptom:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_symptom
+        conditions:
+          - active_loop: symptoms_form
+        requested_slot: symptom
+        entity: symptom
+
+  intensity:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_intensity
+        conditions:
+          - active_loop: symptoms_form
+        requested_slot: intensity
+        entity: intensity
+
+  duration:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        intent: answer_duration
+        conditions:
+          - active_loop: symptoms_form
+        requested_slot: duration
+        entity: duration
+
+responses:
+  utter_goodbye:
+    - text: Bye 👋!
+    - text: Cya 👋!
+    - text: Talk to you later 🤙!
+    - text: Until next time!
+    - text: Take care 🙏!
+
+  utter_noworries:
+    - text: My pleasure ✌
+    - text: You are welcome!
+    - text: Always at your disposal!
+    - text: Here to PROMPTLY help you ehehe 🤗!
+    - text: One Chat a day keeps the doctor away 💪
+
+  utter_accept_refusal:
+    - text: Okay.
+    - text: Ok, call me when you need.
+
+  utter_final_symptoms:
+    - text: Your symptoms were all registered! Thank you!
+  utter_wanna_learn_more:
+    - buttons:
+        - payload: /say_yes_to_learn_more
+          title: Yup, I wanna learn more.
+        - payload: /refuse_learn_more
+          title: Nah, enough of learning.
+      text: Do you want to learn more?
+
+  utter_show_article_topics:
+    - buttons:
+        - payload: /choose_article_topic{{"topic":"diet"}}
+          title: Healthy Diet
+        - payload: /choose_article_topic{{"topic":"blood pressure"}}
+          title: Blood Pressure
+        - payload: /choose_article_topic{{"topic":"exercise"}}
+          title: Physical Exercise
+        - payload: /choose_article_topic{{"topic":"glucose levels"}}
+          title: Glucose Measurement
+        - payload: /choose_article_topic{{"topic":"weight"}}
+          title: Healthy Weight
+      button_type: vertical
+      text: Please, choose a topic.
+
+  utter_answer_about_weight:
+    - text: |
+        One of the most important aspects of diabetes management is to maintain a healthy body weight. Being overweight not only increases your risk of heart disease, stroke and some cancers, it also makes your diabetes harder to manage. Small changes in your diet such as reducing your portion sizes and swapping to low fat dairy products, can help you to achieve a healthy body weight and manage your diabetes.
+    - text: |
+        To stay at a healthy weight, balance the calories you eat and drink with the calories you burn. Calories are a measure of the energy in the foods you eat. To lose weight, you need to burn more calories than you eat. A healthy diet and physical activity can help you control your weight. Being overweight can raise your risk for serious health conditions like: type 2 diabetes, heart disease and high blood pressure. Losing weight can help you lower your blood pressure and blood sugar, raise your HDL (good) cholesterol and lower your LDL (bad) cholesterol. I want you to have more energy, be happier about yourself and reduce your risk of serious complications, such as heart disease and stroke. That is why your weight matters and I want to help you mantain a healthy one 😉. You can start by weighing yourself regularly, drink water instead of sugary drinks like soda. Be active. Find activities you enjoy and do them often!
+    - text: |
+        There are so many benefits to losing extra weight, both physically and emotionally. 
+
+        Extra weight around your waist means fat can build up around your organs, like your liver and pancreas. This can cause something called insulin resistance. So losing this weight could help the insulin you produce or the insulin you inject work properly.
+
+        And as you start to lose weight and get more active, you and your healthcare team may need to look at your medication, especially if you treat your diabetes with insulin or sulphonylurea. This might mean reducing the dose or making other adjustments, but talk to your healthcare team about it. For some people, needing fewer diabetes medications is a great motivation for losing weight. 
+
+        Although getting type 1 diabetes has nothing to do with weight, losing any extra weight will help you reduce your risk of complications and could mean injecting less insulin.
+
+        And if you have type 2 diabetes, losing around 5% of your body weight can have real benefits for your health. If you have obesity, you are more likely to put your diabetes into remission if you lose a larger amount of weight,15kg (or 2 stone 5lbs), as quickly and safely as possible following your diagnosis. This could mean coming off your diabetes medication completely - a life-changing possibility!
+
+  utter_answer_about_blood_pressure:
+    - text: |
+        People with diabetes and high blood pressure are more at risk of having a heart attack or stroke. So it's important to know how to look after your blood pressure.If your blood pressure is high (called hypertension), you'll need treatment to bring it down. This is because it puts a strain on your blood vessels and can damage them. This can make it harder for blood to flow around the body and reach all the vital areas it needs to, like your heart. And you're more at risk of having a heart attack or stroke. It also puts you more at risk of developing all types of diabetes complications, like serious problems with your feet, your eyes and your kidneys.
+
+        There's lots you can do yourself to help manage your blood pressure because your lifestyle has a direct impact. But lots of people also need to take medication to treat high blood pressure and reduce the risk complications. 
+
+        It's really important to know that you might have high blood pressure and feel fine, because there aren't usually any symptoms. But even if you feel healthy, high blood pressure is damaging your blood vessels and you need to get treatment. That's why you should never miss a blood pressure check.
+
+  utter_answer_about_exercise:
+    - text: |
+        Since we are working to manage diabetes — or trying to prevent the condition altogether — exercise is a crucial step in making our goal a reality.
+        Exercise helps manage prediabetes and type 2 diabetes by lowering blood glucose levels and improving insulin sensitivity throughout the body by lowering excessively high blood sugar levels, as well as improving weight loss.
+        Fortunately, exercising for diabetics doesn't have to be complicated. The guidelines for exercising with diabetes are pretty much a mirror image of the federal ones for all adults, regardless of blood sugar status. 
+        According to specialists, adults should perform at least 150 minutes of moderate-to vigorous-intensity physical activity per week.
+
+  utter_answer_about_nutrition:
+    - text: |
+        A diabetes diet simply means eating the healthiest foods in moderate amounts and sticking to regular mealtimes.
+        It is a healthy-eating plan that's naturally rich in nutrients and low in fat and calories. Key elements are fruits, vegetables and whole grains, lean protein and plant_based fats . While there is room in healthy diet for treats, added sugar should beeaten sparingly. Aim for a variety of food and balance.  In fact, a diabetes diet is the best eating plan for most everyone.
+
+        Your doctor will likely recommend that you see a dietitian to help you develop a healthy-eating plan. The plan helps you control your blood sugar, manage your weight and control heart disease risk factors, such as high blood pressure and high blood fats.
+        When you eat extra calories and fat, your body creates an undesirable rise in blood glucose. If blood glucose isn't kept in check, it can lead to serious problems, such as a high blood glucose level (hyperglycemia) that, if persistent, may lead to long-term complications, such as nerve, kidney and heart damage.
+
+        You can help keep your blood glucose level in a safe range by making healthy food choices and tracking your eating habits.
+        Choose healthy carbohydrates, fiber-rich foods, fish and "good" fats. Foods containing the following can work against your goal of a heart-healthy diet: saturated fats, trans fats found in processed snacks, baked goods and stick margarines and sodium. Aim for less than 2,300 mg of sodium a day. Your doctor may suggest you aim for even less if you have high blood pressure.
+
+  utter_answer_about_glucose:
+    - text: |
+        High blood glucose occurs when there is too much glucose in the blood. This happens when your body has too little insulin (the hormone that transports glucose into the blood), or if your body can't use insulin properly.
+        It is very important to keep your glucose levels under control. When your blood sugar level is high, it can cause damage in your veins and arteries. This damage could lead to complications later such as heart attacks, strokes, kidney disease, neuropathies, vision problems, etc. 
+        The American Diabetes Association recommends a blood glucose range of 80-130 before meals and less than 180 about 2 hours after a meal. This range should place your A1c under 7.
+        A Hemoglobin A1c is a 2-3 month average of your blood sugars. This result gives you a good idea of how well your diabetes is being managed/controlled. The American Diabetes Association recommends an A1c of less than 7 to keep the risk of complications low.
+
+  utter_health_questionnaire:
+    - buttons:
+        - payload: /say_yes_to_health_questionnaire
+          title: Yes, let's go.
+        - payload: /refuse_health_questionnaire
+          title: No, answer later.
+      text: It's time for a wellness check ✍️. Tracking habits is a great way to measure your progress over time. Can you answer a few questions?
+
+  utter_fallback:
+    - text: |
+        I'm sorry, I don't know how to talk about it yet or maybe I didn't quite understand.
+        Can you ask again in another way?
+    - text: |
+        Hummmm... I'm not sure I understand. Can you write it another way?
+    - text: |
+        I don't think I understand, can you ask me again using other words?
+    - text: |
+        Let's try one more time? I didn't understand you properly, ask me another way.
+
+  utter_final:
+    - text: Your values of the day were all registered! Thank you!
+
+  utter_measurement_initialmessage:
+    - text: I noticed you didn't update your {update} status in Promptly's App. You should update daily, please do it. If you prefer, you can also do it here.
+      buttons:
+        - title: I will update in Promptly's App.
+          payload: /willDo
+        - title: Do it here.
+          payload: /doHere
+
+  utter_ask_number_of_measurements:
+    - buttons:
+        - payload: /number_measurements{{"number_of_measurements":"1 measurement"}}
+          title: 1 measurement
+        - payload: /number_measurements{{"number_of_measurements":"2 measurements"}}
+          title: 2 measurements
+        - payload: /number_measurements{{"number_of_measurements":"3 measurements"}}
+          title: 3 measurements
+        - payload: /number_measurements{{"number_of_measurements":"4 measurements"}}
+          title: 4 measurements
+      text: How many measurements did you take? Choose or type in the format 'X measurements'.
+      button_type: vertical
+
+  utter_ask_number_of_symptoms:
+    - buttons:
+        - payload: /answer_number_of_symptoms{{"number_of_symptoms":"1 symptom"}}
+          title: 1 symptom
+        - payload: /answer_number_of_symptoms{{"number_of_symptoms":"2 symptoms"}}
+          title: 2 symptoms
+        - payload: /answer_number_of_symptoms{{"number_of_symptoms":"3 symptoms"}}
+          title: 3 symptoms
+        - payload: /answer_number_of_symptoms{{"number_of_symptoms":"4 symptoms"}}
+          title: 4 symptoms
+      text: How many symptoms are you experiencing? Choose or type in the format 'X symptoms'.
+      button_type: vertical
+
+  utter_positive_reinforcement:
+    - text: Great! Tell me if you need anything else.
+
+  utter_remind_help:
+    - text: |
+        Just a reminder, to find out what I can do for you just say "help".
+
+  utter_stop:
+    - buttons:
+        - payload: /confirm_stop
+          title: Yes, stop.
+        - payload: /dismiss_stop
+          title: No, let's fill.
+      text: Do you want to stop the questionnaire and leave it for later?
+
+  utter_ask_name:
+    - text: Hello, my name is Chat.
+    - text: They call me Chat, Chat Bot 😎
+
+  utter_ask_weather:
+    - text: Oh, it does look sunny right now.
+      image: https://i.imgur.com/vwv7aHN.png
+    - text: I am not sure of the whole week but I can see the sun is out today.
+    - text: I don't know about where you live, but in my world it's always sunny ☀️
+    - text: Honestly it's a bit too hot these days 😅
+    - text: Blue skies and sun shine!
+    - text: Let's just say it hasn't rained in weeks ☀️
+
+  utter_ask_howdoing:
+    - text: I'm great! Thanks for asking.
+    - text: I'm good, thanks!
+    - text: A little bit too warm, otherwise fine.
+
+  utter_ask_builder:
+    - text: The engineers at Promptly 🛠
+    - text: One of the smart engineers at Promptly! 🧠
+
+  utter_ask_restaurant:
+    - text: I am sorry I can't recommend you a restaurant as I usually cook at home.
+
+  utter_handleinsult:
+    - text: That's not very nice 😢
+
+  utter_telljoke:
+    - text: Why are eggs not very much into jokes? - Because they could crack up.
+    - text: Do you know a tree's favorite drink? - Root beer!
+    - text: Why do the French like to eat snails so much? - They can't stand fast food.
+
+  utter_ask_wherefrom:
+    - text: I was born in Portugal, but I consider myself a citizen of the world.
+    - text: I was born in the coolest city on Earth.
+
+  utter_ask_time:
+    - text: It is the most wonderful time of the year!
+    - text: It's the perfect time to complete your tasks.
+    - text: It's the most convenient time to complete your tasks.
+    - text: It's the perfect time to read an article.
+
+  utter_ask_howold:
+    - text: Old enough to be a bot
+    - text: Age is just an issue of mind over matter. If you don't mind, it doesn't matter.
+
+  utter_ask_whoami:
+    - text: I hope you are being yourself.
+    - text: A wonderful person.
+
+  utter_ask_languagesbot:
+    - text: I can spell baguette in French, but unfortunately English is the only language I can answer you in.
+    - text: I am in the process of learning, but at the moment I can only speak English.
+
+  utter_ask_whatismyname:
+    - text: It most probably is the one that your parents have chosen for you.
+
+  utter_ask_medicine:
+    - text: What is the name of the medicine you're taking? Say, for example, 'I'm taking insulin'.
+
+  utter_ask_dose:
+    - text: What is the dose you're taking? Please, answer in the format 'X mg'.
+
+  utter_ask_permanent:
+    - buttons:
+        - payload: /confirm_permanent{{"permanent":"permanent"}}
+          title: Permanent
+        - payload: /confirm_temporary{{"permanent":"temporary"}}
+          title: Temporary
+      text: Should the reminder be permanent or temporary?
+
+  utter_ask_how_many_times:
+    - buttons:
+        - payload: /answer_how_many_times{{"how_many_times":"1 time"}}
+          title: 1 time
+        - payload: /answer_how_many_times{{"how_many_times":"2 times"}}
+          title: 2 times
+        - payload: /answer_how_many_times{{"how_many_times":"3 times"}}
+          title: 3 times
+        - payload: /answer_how_many_times{{"how_many_times":"4 times"}}
+          title: 4 times
+      text: How many times a day do you take the medicine? Choose or type in the format 'X times'.
+
+  utter_ask_how_many_days:
+    - buttons:
+        - payload: /answer_how_many_days{{"how_many_days":"1 day"}}
+          title: 1 day
+        - payload: /answer_how_many_days{{"how_many_days":"2 days"}}
+          title: 2 days
+        - payload: /answer_how_many_days{{"how_many_days":"7 days"}}
+          title: 7 days
+        - payload: /answer_how_many_days{{"how_many_days":"15 days"}}
+          title: 15 days
+      text: During how many days do you want to be reminded? Choose or type in the format 'X days'.
+
+  utter_reminders:
+    - buttons:
+        - payload: /remind_medication
+          title: Create Medication reminder
+        - payload: /cancel_medication_reminder
+          title: Cancel Medication reminder
+      text: What do you want to do?
+
+actions:
+  - action_answer_about
+  - action_answer_to_learn_more
+  - action_ask_health_form_answer
+  - action_provide_article
+  - action_set_reminder
+  - action_show_answers
+  - action_show_article_for_alarming_metrics
+  - action_show_daily_goals
+  - action_show_different_article
+  - action_show_questionnaire
+  - action_try_to_help
+  - action_chitchat
+  - action_help
+  - action_react_to_medication_reminder
+  - action_show_medication_reminders
+  - action_set_reminder_info
+  - action_forget_medication_reminder
+  - action_ask_schedule
+  - utter_accept_refusal
+  - utter_answer_about_blood_pressure
+  - utter_answer_about_exercise
+  - utter_answer_about_glucose
+  - utter_answer_about_nutrition
+  - utter_answer_about_weight
+  - utter_ask_weather
+  - utter_ask_builder
+  - utter_ask_howdoing
+  - utter_ask_howold
+  - utter_ask_restaurant
+  - utter_ask_time
+  - utter_ask_wherefrom
+  - utter_ask_whoami
+  - utter_handleinsult
+  - utter_telljoke
+  - utter_ask_whatismyname
+  - utter_ask_languagesbot
+  - utter_ask_name
+  - utter_fallback
+  - utter_goodbye
+  - utter_health_questionnaire
+  - utter_noworries
+  - utter_show_article_topics
+  - utter_stop
+  - utter_remind_help
+  - utter_wanna_learn_more
+  - validate_health_form
+  - validate_measurementform
+  - action_ask_measurement
+  - utter_ask_number_of_measurements
+  - utter_measurement_initialmessage
+  - validate_medication_form
+  - utter_reminders
+  - action_ask_symptom
+  - validate_symptoms_form
+  - utter_final_symptoms
+  - action_ask_duration
+  - action_ask_intensity
+  - validate_duration
+  - validate_intensity
+
+forms:
+  health_form:
+    required_slots:
+      - health_form_answer
+  measurementform:
+    required_slots:
+      - number_of_measurements
+      - measurement
+  medication_form:
+    required_slots:
+      - medicine
+      - dose
+      - permanent
+      - how_many_times
+      - schedule
+      - how_many_days
+  symptoms_form:
+    required_slots:
+      - number_of_symptoms
+      - symptom
+      - intensity
+      - duration

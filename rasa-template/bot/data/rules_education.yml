@@ -1,0 +1,16 @@
+version: "3.0"
+rules:
+  - rule: Ask if wants to learn more about a given topic
+    steps:
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - rule: User chooses article topic
+    steps:
+      - intent: choose_article_topic
+      - action: action_provide_article
+
+  - rule: Show another article, when repeated
+    steps:
+      - intent: already_viewed_article
+      - action: action_show_different_article

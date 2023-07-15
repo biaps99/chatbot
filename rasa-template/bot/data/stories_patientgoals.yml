@@ -1,0 +1,352 @@
+version: "3.0"
+stories:
+  - story: user asks about weight, glucose, blood pressure, exercise or nutrition
+    steps:
+      - or:
+          - intent: ask_about_blood_pressure
+          - intent: ask_about_exercise
+          - intent: ask_about_nutrition
+          - intent: ask_about_glucose
+          - intent: ask_about_weight
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - story: interactive_story_1
+    steps:
+      - intent: ask_help_in_tasks
+      - action: action_try_to_help
+      - intent: view_article_types
+      - action: utter_show_article_topics
+      - intent: choose_article_topic
+        entities:
+          - topic: blood pressure
+      - slot_was_set:
+          - topic: blood pressure
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/doctor-visits/screening-tests/get-your-blood-pressure-checked
+      - intent: already_viewed_article
+      - action: action_show_different_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/doctor-visits/talking-doctor/medicines-prevent-heart-attack-and-stroke-questions-doctor
+
+  - story: interactive_story_3
+    steps:
+      - intent: ask_about_exercise
+        entities:
+          - topic: exercise
+      - slot_was_set:
+          - topic: exercise
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: say_yes_to_learn_more
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://news.christianacare.org/2012/11/why-is-exercise-so-important-for-people-with-diabetes/
+      - intent: thankyou
+      - action: utter_noworries
+
+  - story: interactive_story_4
+    steps:
+      - intent: ask_about_nutrition
+        entities:
+          - topic: diet
+      - slot_was_set:
+          - topic: diet
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: refuse_learn_more
+      - action: utter_accept_refusal
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: interactive_story_5
+    steps:
+      - intent: ask_about_glucose
+        entities:
+          - topic: glucose
+      - slot_was_set:
+          - topic: glucose
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: say_yes_to_learn_more
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://my.clevelandclinic.org/health/diseases/9815-hyperglycemia-high-blood-sugar
+      - intent: ask_about_nutrition
+        entities:
+          - topic: nutrition
+      - slot_was_set:
+          - topic: nutrition
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: say_yes_to_learn_more
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://www.canopyhealth.com/understanding-the-relationship-between-nutrition-and-diabetes
+
+  - story: interactive_story_6
+    steps:
+      - intent: ask_help_in_tasks
+      - action: action_try_to_help
+      - intent: view_article_types
+      - action: utter_show_article_topics
+      - intent: choose_article_topic
+        entities:
+          - topic: diet
+      - slot_was_set:
+          - topic: diet
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://www.winchesterhospital.org/health-library/article?id=889606
+      - intent: thankyou
+      - action: utter_noworries
+      - intent: ask_about_glucose
+        entities:
+          - topic: glucose measurement
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: refuse_learn_more
+      - action: utter_accept_refusal
+
+  - story: interactive_story_7
+    steps:
+      - intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+      - intent: refuse_help
+      - action: utter_accept_refusal
+
+  - story: interactive_story_8
+    steps:
+      - intent: ask_about_blood_pressure
+        entities:
+          - topic: blood pressure
+      - slot_was_set:
+          - topic: blood pressure
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+      - intent: refuse_learn_more
+      - action: utter_accept_refusal
+      - intent: check_progress
+      - action: action_show_daily_goals
+
+  - story: interactive_story_9
+    steps:
+      - intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+      - intent: view_article_types
+      - action: utter_show_article_topics
+      - intent: choose_article_topic
+        entities:
+          - topic: exercise
+      - slot_was_set:
+          - topic: exercise
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://news.christianacare.org/2012/11/why-is-exercise-so-important-for-people-with-diabetes/
+      - intent: already_viewed_article
+      - action: action_show_different_article
+      - slot_was_set:
+          - article_url: https://www.health.harvard.edu/staying-healthy/the-importance-of-exercise-when-you-have-diabetes
+
+  - story: interactive_story_10
+    steps:
+      - intent: ask_help_in_tasks
+      - action: action_try_to_help
+      - intent: ask_about_exercise
+        entities:
+          - topic: physical exercise
+      - slot_was_set:
+          - topic: physical exercise
+      - action: action_answer_about
+      - action: utter_wanna_learn_more
+
+  - story: User deny health check
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - intent: refuse_health_questionnaire
+      - action: action_set_reminder
+
+  - story: interactive_story_14
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_show_answers
+      - action: action_listen
+      - slot_was_set:
+          - alarming_metrics:
+              - lack of sleep
+              - fatigue
+      - action: action_show_article_for_alarming_metrics
+
+  - story: User interrupts the form and doesn't want to continue
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - intent: stop
+      - action: utter_stop
+      - intent: confirm_stop
+      - action: action_deactivate_loop
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+
+  - story: User introduces values of glucose
+    steps:
+      - intent: glucose_update
+        entities:
+          - update: glucose
+      - slot_was_set:
+          - update: glucose
+      - action: utter_measurement_initialmessage
+      - intent: doHere
+      - action: measurementform
+      - active_loop: measurementform
+      - slot_was_set:
+          - requested_slot: number_of_measurements
+      - slot_was_set:
+          - number_of_measurements: 2 measurements
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_final
+
+  - story: User introduces values of blood preassure
+    steps:
+      - intent: blood_update
+        entities:
+          - update: blood
+      - slot_was_set:
+          - update: blood
+      - action: utter_measurement_initialmessage
+      - intent: doHere
+      - action: measurementform
+      - active_loop: measurementform
+      - slot_was_set:
+          - requested_slot: number_of_measurements
+      - slot_was_set:
+          - number_of_measurements: 3 measurements
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_final
+
+  - story: User introduces values of weight
+    steps:
+      - intent: weight_update
+        entities:
+          - update: weight
+      - slot_was_set:
+          - update: weight
+      - action: utter_measurement_initialmessage
+      - intent: doHere
+      - action: measurementform
+      - active_loop: measurementform
+      - slot_was_set:
+          - requested_slot: number_of_measurements
+      - slot_was_set:
+          - number_of_measurements: 4 measurements
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - slot_was_set:
+          - requested_slot: measurement
+      - slot_was_set:
+          - measurement: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_final
+
+  - story: user says they will update glucose status on promptly app
+    steps:
+      - intent: glucose_update
+        entities:
+          - update: glucose
+      - slot_was_set:
+          - update: glucose
+      - action: utter_measurement_initialmessage
+      - intent: willDo
+      - action: utter_positive_reinforcement
+
+  - story: user says they will update weight status on promptly app
+    steps:
+      - intent: weight_update
+        entities:
+          - update: weight
+      - slot_was_set:
+          - update: weight
+      - action: utter_measurement_initialmessage
+      - intent: willDo
+      - action: utter_positive_reinforcement
+
+  - story: user says they will update blood status on promptly app
+    steps:
+      - intent: blood_update
+        entities:
+          - update: blood
+      - slot_was_set:
+          - update: blood
+      - action: utter_measurement_initialmessage
+      - intent: willDo
+      - action: utter_positive_reinforcement

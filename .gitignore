@@ -1,0 +1,4 @@
+.mypy_cache
+.vscode
+.myconfig
+.DS_store

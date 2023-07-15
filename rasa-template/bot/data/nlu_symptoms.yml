@@ -1,0 +1,87 @@
+version: "3.0"
+nlu:
+  - intent: answer_number_of_symptoms
+    examples: |
+      - [1 symptom](number_of_symptoms)
+      - [2 symptoms](number_of_symptoms)
+      - [3 symptoms](number_of_symptoms)
+      - [4 symptoms](number_of_symptoms)
+      - [5 symptoms](number_of_symptoms)
+      - [6 symptoms](number_of_symptoms)
+      - [7 symptoms](number_of_symptoms)
+      - [8 symptoms](number_of_symptoms)
+      - [9 symptoms](number_of_symptoms)
+
+  - intent: symptoms_check
+    examples: |
+      - Give me symptoms check
+      - symptoms update
+      - give me symptoms update
+      - symptom update
+      - symptoms check
+      - symptoms
+      - symptom
+      - symptom check
+      - check symptoms
+      - check symptoms felt
+      - patients symptoms
+      - patient symptoms
+
+  - intent: answer_intensity
+    examples: |
+      - [1 intensity](intensity)
+      - [2 intensity](intensity)
+      - [3 intensity](intensity)
+      - [4 intensity](intensity)
+      - [5 intensity](intensity)
+      - [6 intensity](intensity)
+      - [7 intensity](intensity)
+      - [8 intensity](intensity)
+      - [9 intensity](intensity)
+      - [10 intensity](intensity)
+      - [3 intensity](intensity)
+      - [8 intensity](intensity)
+
+  - intent: answer_symptom
+    examples: |
+      - The symptom I am experiencing is [hunger](symptom).
+      - I am experiencing [thirst](symptom).
+      - I am feeling [tiredness](symptom).
+      - I'm having [blurry vision](symptom).
+      - I feel [tiredness](symptom).
+      - i feel [tiredness](symptom).
+      - i feel [hunger](symptom)
+
+  - intent: answer_duration
+    examples: |
+      - [10 minutes](duration)
+      - [20 minutes](duration)
+      - [30 minutes](duration)
+      - [40 minutes](duration)
+      - [60 minutes](duration)
+      - [120 minutes](duration)
+      - [1 hour](duration).
+      - [2 hours](duration).
+      - [3 hours](duration).
+      - [4 hours](duration).
+      - [5 hours](duration).
+      - [6 hours](duration).
+      - [7 hours](duration).
+      - [8 hours](duration).
+      - [9 hours](duration).
+      - [10 hours](duration).
+      - [11 hours](duration).
+      - [12 hours](duration).
+      - [13 hours](duration).
+      - [14 hours](duration).
+      - [15 hours](duration).
+      - [16 hours](duration).
+      - [17 hours](duration).
+      - [1 day](duration).
+      - [2 days](duration).
+      - [3 days](duration).
+      - [4 days](duration).
+      - [5 days](duration).
+      - [6 days](duration).
+      - [7 days](duration).
+      - [8 days](duration).

@@ -1,0 +1,48 @@
+version: "3.0"
+stories:
+  - story: create a medication reminder
+    steps:
+      - intent: remind_medication
+      - action: medication_form
+      - active_loop: medication_form
+      - slot_was_set:
+          - requested_slot: medicine
+      - slot_was_set:
+          - medicine: insulin
+      - slot_was_set:
+          - requested_slot: dose
+      - slot_was_set:
+          - dose: 5 mg
+      - slot_was_set:
+          - requested_slot: permanent
+      - slot_was_set:
+          - permanent: False
+      - slot_was_set:
+          - requested_slot: how_many_times
+      - slot_was_set:
+          - how_many_times: 2 times
+      - slot_was_set:
+          - requested_slot: schedule
+      - slot_was_set:
+          - schedule: null
+      - slot_was_set:
+          - requested_slot: schedule
+      - slot_was_set:
+          - schedule: null
+      - slot_was_set:
+          - requested_slot: how_many_days
+      - slot_was_set:
+          - how_many_days: 2 days
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_set_reminder_info
+
+  - story: cancel a medication reminder
+    steps:
+      - intent: cancel_medication_reminder
+      - action: action_show_medication_reminders
+      - intent: confirm_cancel_medication_reminder
+        entities:
+          - medicine: metaformin
+      - action: action_forget_medication_reminder

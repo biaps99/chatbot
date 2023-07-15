@@ -1,0 +1,193 @@
+version: "3.0"
+nlu:
+  - intent: remind_medication
+    examples: |
+      - remind me to take my medication
+      - set medication alert.
+      - do a medication reminder, please
+      - create medication alert.
+      - remind me to take my meds
+      - request to take my meds. 
+      - set medicine reminder.
+      - set drug alert.
+      - please, create a medication reminder.
+      - create new medication reminder
+      - create medicine reminder
+      - remind meds
+
+  - intent: reminders
+    examples: |
+      - reminders
+      - reminders menu
+      - reminders actions
+
+  - intent: answer_medicine
+    examples: |
+      - The name of the medicine I'm taking is [Benuron](medicine).
+      - The name of the medicine I'm taking is [insulin](medicine).
+      - I'm taking [insulin](medicine).
+      - I'm having [Amylinomimetic](medicine)
+      - It's [Glipizide](medicine)
+      - It's [Glimepride](medicine)
+      - It's [Glyburide](medicine)
+      - It's [Metformin](medicine)
+      - It's [Acarbose](medicine)
+      - It's [Liraglutide](medicine)
+      - [insulin](medicine)
+      - [paracetamol](medicine)
+      - [Metformin](medicine)
+      - [acarbose](medicine)
+
+  - intent: answer_dose
+    examples: |
+      - The dose is [500 mg](dose)
+      - The dose is [1 mg](dose)
+      - The dose is [2 mg](dose)
+      - The dose is [4 mg](dose)
+      - The dose is [5 mg](dose)
+      - The dose is [1.5 mg](dose)
+      - I'm having [500 mg](dose)
+      - The dose I'm having is [500 mg](dose)
+      - The quantity I'm taking is [1.25 mg](dose)
+      - The dose is [0.5 mg](dose)
+      - The dose is [16 mg](dose)
+      - The dose is [500 mg](dose)
+      - The dosage is [3 mg](dose)
+      - The dosage is [10mg](dose)
+      - The dosage is [30 mg](dose)
+      - The dosage is [5 mg](dose)
+      - [4 mg](dose)
+      - [6 mg](dose)
+      - [8 mg](dose)
+      - [9 mg](dose)
+      - [10 mg](dose)
+      - [12mg](dose)
+      - [14mg](dose)
+      - [100mg](dose)
+      - [9 g](dose)
+      - [50 g](dose)
+      - [22g](dose)
+      - [13g](dose)
+      - [18mg](dose)
+
+  - intent: answer_schedule
+    examples: |
+      - [5:00](schedule)
+      - [6:00](schedule)
+      - [7:00](schedule)
+      - [8:00](schedule)
+      - [8:15](schedule)
+      - [8:30](schedule)
+      - [8:45](schedule)
+      - [9:00](schedule)
+      - [9:10](schedule)
+      - [9:20](schedule)
+      - [9:30](schedule)
+      - [10:00](schedule)
+      - [11:00](schedule)
+      - [12:00](schedule)
+      - [13:00](schedule)
+      - [14:15](schedule)
+      - [17:30](schedule)
+      - [18:20](schedule)
+      - [19:00](schedule)
+      - [20:00](schedule)
+      - [21:00](schedule)
+      - [22:00](schedule)
+      - [23:00](schedule)
+      - [24:00](schedule)
+      - [10 am](schedule)
+      - [17pm](schedule)
+      - [12 am](schedule)
+      - [13pm](schedule)
+      - [15 pm](schedule)
+      - [16 pm](schedule)
+      - [19pm](schedule)
+      - [17pm](schedule)
+      - [9 am](schedule)
+      - [8 am](schedule)
+
+  - intent: answer_how_many_times
+    examples: |
+      - [1 time](how_many_times) a day.
+      - [2 times](how_many_times) a day.
+      - [3 times](how_many_times) a day.
+      - [4 times](how_many_times) a day.
+      - Taken [2 times](how_many_times) daily
+      - Taken [3 times](how_many_times) daily
+      - Taken [4 times](how_many_times) daily
+      - Taken [1 time](how_many_times) daily
+      - [1 time](how_many_times)
+      - [2 times](how_many_times)
+      - [3 times](how_many_times)
+      - [4 times](how_many_times)
+
+  - intent: answer_how_many_days
+    examples: |
+      - [1 day](how_many_days)
+      - [2 days](how_many_days)
+      - [7 days](how_many_days)
+      - [15 days](how_many_days)
+      - During [2 days](how_many_days)
+      - During [30 days](how_many_days)
+      - During [3 days](how_many_days)
+      - During [1 day](how_many_days)
+      - [1 day](how_many_days)
+      - [2 days](how_many_days)
+      - [7 days](how_many_days)
+      - [15 days](how_many_days)
+
+  - intent: show_medication_reminder
+    examples: |
+      - remind [5 mg](dose) of [metaformin](medicine).
+      - remind [15 mg](dose) of [insulin](medicine).
+      - remind [25 mg](dose) of [acarbose](medicine).
+      - remind [35 mg](dose) of [paracetamol](medicine).
+      - remind [45 mg](dose) of [benuron](medicine).
+      - remind [65 mg](dose) of [Glyburide](medicine).
+
+  - intent: cancel_medication_reminder
+    examples: |
+      - cancel a medication reminder
+      - cancel medication reminder
+      - cancel medicine
+      - I want to cancel a medication reminder
+      - I need to cancel a medication reminder
+      - can I cancel a medication reminder, please?
+      - bot, can you cancel a medication reminder?
+      - I want to cancel a medicine.
+      - delete medication reminder
+      - delete medicine
+      - I dont take a medicine anymore.
+      - cancel reminder
+      - delete reminder
+      - cancel reminders for medicine
+      - dont need to be reminded anymore, bot
+
+  - intent: confirm_cancel_medication_reminder
+    examples: |
+      - Yes, cancel [metaformin](medicine) reminder.
+      - Yes, the [insulin](medicine) reminder is the one I wanna cancel.
+      - Cancel [acarbose](medicine) reminder.
+      - Cancel [paracetamol](medicine) reminder.
+      - Cancel [benuron](medicine) reminder.
+      - Cancel [Glyburide](medicine) reminder.
+      - cancel [metaformin](medicine) reminder.
+
+  - intent: confirm_permanent
+    examples: |
+      - The reminder is [permanent](permanent).
+      - [permanent](permanent) reminder
+      - [permanent](permanent)
+      - I want it to be [permanent](permanent)
+      - let it be [permanent](permanent)
+      - Permanent(permanent)
+
+  - intent: confirm_temporary
+    examples: |
+      - The reminder should be [temporary](permanent).
+      - [Temporary](permanent).
+      - [Temporary](permanent) reminder
+      - [temporary](permanent)
+      - i want the reminder to be [temporary](permanent).
+      - let it be [temporary](permanent)

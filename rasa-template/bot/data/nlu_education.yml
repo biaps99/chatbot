@@ -1,0 +1,59 @@
+version: "3.0"
+nlu:
+  - intent: refuse_learn_more
+    examples: |
+      - No, I don't want to learn more.
+      - No, enough of learning.
+      - No, i dont want to learn more.
+      - Nah, enough of learning.
+      - Nah, don't want to learn more.
+
+  - intent: say_yes_to_learn_more
+    examples: |
+      - Yup, I wanna learn more.
+      - Yes, I wanna learn more.
+      - Sure, let's learn more about it.
+
+  - intent: view_article_types
+    examples: |
+      - Show me the types of educational articles you provide.
+      - View article topics.
+      - Have any educational articles?
+      - Anything for me to read?
+      - Do you have any articles?
+      - Types of educational articles you have.
+      - more for me to read
+      - article types you have
+      - show types of articles you provide.
+
+  - intent: already_viewed_article
+    examples: |
+      - I already read this article.
+      - Repeated article.
+      - Already saw this paper, show another one.
+      - Already view this.
+      - Show me something different.
+      - Boring article, show something new.
+      - I already read this article
+      - already saw that one, show other
+      - repeated article
+
+  - intent: choose_article_topic
+    examples: |
+      - Article about [diet](topic)
+      - Article about [Glucose](topic)
+      - Paper about [Glucose measurement](topic)
+      - Paper about [Physical Exercise](topic)
+      - Paper about [Exercise](topic)
+      - Paper about [Body Weight](topic)
+      - Article about [Blood Pressure](topic)
+      - Show me an article about the importance of [Diet](topic).
+      - Article about [Glucose](topic).
+      - Any articles related to [physical Exercise](topic)?
+      - Any articles related to [diabetes](topic)?
+      - Any articles related to [weight](topic)
+      - show an article about [blood pressure](topic)
+      - give me an article about [nutrition](topic).
+      - show an article about [health](topic).
+      - show an article about [glucose](topic).
+      - show me an article about [weight loss](topic)

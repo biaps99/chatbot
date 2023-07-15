@@ -1,0 +1,12 @@
+action_endpoint:
+  #url: "http://localhost:5055/webhook" # for local environment
+  url: "http://actions:5055/webhook" # for Docker environment
+event_broker:
+  type: pika
+  #url: localhost # for local environment
+  url: rabbitmq # for Docker environment
+  username: admin
+  password: admin
+  queues:
+    - bot_messages
+  exchange_name: exchange

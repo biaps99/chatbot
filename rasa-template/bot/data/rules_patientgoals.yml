@@ -1,0 +1,73 @@
+version: "3.0"
+rules:
+  - rule: User wants to check progress
+    steps:
+      - intent: check_progress
+      - action: action_show_daily_goals
+
+  - rule: User wants help
+    steps:
+      - intent: ask_help_in_tasks
+      - action: action_try_to_help
+
+  - rule: Bot accepts refusal
+    steps:
+      - or:
+          - intent: refuse_help
+          - intent: refuse_learn_more
+      - action: utter_accept_refusal
+
+  - rule: Show goals when user greets
+    steps:
+      - intent: greet
+      - action: action_show_daily_goals
+      - action: action_try_to_help
+
+  - rule: Activate Health Form
+    steps:
+      - action: utter_health_questionnaire
+      - intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+
+  - rule: Submit Health Form
+    condition:
+      - active_loop: health_form
+    steps:
+      - action: health_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+
+  - rule: Set reminder for health daily check when user refuses to fill it
+    steps:
+      - action: utter_health_questionnaire
+      - intent: refuse_health_questionnaire
+      - action: action_set_reminder
+
+  - rule: Show questionnaire
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+
+  - rule: Activate form measurement
+    steps:
+      - intent: doHere
+      - action: measurementform
+      - active_loop: measurementform
+
+  - rule: Submmit form weight
+    condition:
+      - active_loop: measurementform
+    steps:
+      - action: measurementform
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: utter_final
+
+  - rule: Confirm if user wants to stop the questionnaire
+    steps:
+      - intent: stop
+      - action: utter_stop

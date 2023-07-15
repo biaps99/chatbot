@@ -1,0 +1,150 @@
+version: "3.9"
+
+services:
+  # ================================= Bot =====================================
+  # Rasa bot
+  bot:
+    build:
+      context: .
+      dockerfile: ./rasa-template/docker/bot.Dockerfile
+    container_name: bot
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Lisbon
+    volumes:
+      - ./rasa-template/bot/:/bot/
+      - /etc/timezone:/etc/timezone/
+      - /etc/localtime:/etc/localtime/
+    ports:
+      - 5005:5005
+    depends_on:
+      - actions
+    networks:
+      - bot
+
+  # ================================= Actions =================================
+  # Rasa middleware used to connect with external APIs.
+  actions:
+    build:
+      context: .
+      dockerfile: ./rasa-template/docker/actions.Dockerfile
+    container_name: actions
+    restart: unless-stopped
+    ports:
+      - 5055:5055
+    environment:
+      - TZ=Europe/Lisbon
+    volumes:
+      - ./rasa-template/bot:/bot
+      - /etc/timezone:/etc/timezone/
+      - /etc/localtime:/etc/localtime/
+
+    command: sh -c "python -m rasa_sdk --actions actions"
+    networks:
+      - bot
+
+  # =============================== Broker ====================================
+  # Custom broker to store Rasa tracker data.
+  rabbitmq:
+    restart: unless-stopped
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    env_file:
+      - rasa-template/env/rabbitmq.env
+    expose:
+      - 5672
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - bot
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://localhost:15672 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  # Custom broker consumer responsible to store data in ElasticSearch.
+  rabbitmq-consumer:
+    build:
+      context: .
+      dockerfile: ./rasa-template/docker/consumer.Dockerfile
+    container_name: rabbitmq-consumer
+    restart: unless-stopped
+    volumes:
+      - ./rasa-template/modules/rabbitmq/consumer/:/opt/scripts/
+    depends_on:
+      - rabbitmq
+    env_file:
+      - rasa-template/env/rabbitmq-consumer.env
+    command: python /opt/scripts/consume_bot_messages.py
+    networks:
+      - bot
+
+  # =============================== Analytics =================================
+
+  elasticsearch:
+    build:
+      context: .
+      dockerfile: ./rasa-template/docker/elasticsearch.Dockerfile
+    restart: unless-stopped
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - esbackup:/usr/share/elasticsearch/backup
+      - ./rasa-template/modules/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - bot
+    env_file:
+      - rasa-template/env/elasticsearch.env
+
+  kibana:
+    depends_on:
+      - elasticsearch
+    image: docker.elastic.co/kibana/kibana:7.3.0
+    restart: unless-stopped
+    container_name: kibana
+    networks:
+      - bot
+    ports:
+      - 5601:5601
+    env_file:
+      - rasa-template/env/kibana.env
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://localhost:5601 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
+  # =============================== Fake API =================================
+  # Fake API to simulate interaction with Promptly.
+  fakeapi:
+    build:
+      context: .
+      dockerfile: ./fake-api/fakeapi.Dockerfile
+    restart: unless-stopped
+    container_name: fakeapi
+    ports:
+      - 8000:8000
+    networks:
+      - bot
+
+volumes:
+  esbackup:
+  esdata:
+    driver: local
+
+networks:
+  bot:
+    driver: bridge

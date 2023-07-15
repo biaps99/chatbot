@@ -1,0 +1,89 @@
+version: "3.0"
+stories:
+  - story: chitchat situations
+    steps:
+      - or:
+          - intent: ask_weather
+          - intent: ask_builder
+          - intent: ask_howdoing
+          - intent: ask_languagesbot
+          - intent: ask_howold
+          - intent: ask_restaurant
+          - intent: ask_time
+          - intent: ask_wherefrom
+          - intent: ask_whoami
+          - intent: handleinsult
+          - intent: telljoke
+          - intent: ask_whatismyname
+          - intent: ask_name
+      - action: action_chitchat
+
+  - story: chitchat in the beginning of the questionnaire
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - or:
+          - intent: ask_weather
+          - intent: ask_builder
+          - intent: ask_howdoing
+          - intent: ask_languagesbot
+          - intent: ask_howold
+          - intent: ask_restaurant
+          - intent: ask_time
+          - intent: ask_wherefrom
+          - intent: ask_whoami
+          - intent: handleinsult
+          - intent: telljoke
+          - intent: ask_whatismyname
+          - intent: ask_name
+      - action: action_chitchat
+      - action: utter_stop
+      - intent: confirm_stop
+      - action: action_deactivate_loop
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+
+  - story: chitchat - user asks about the bot is doing in the middle of a questionnaire, but continues it
+    steps:
+      - intent: show_wellness_check
+      - action: utter_health_questionnaire
+      - intent: say_yes_to_health_questionnaire
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - intent: ask_howdoing
+      - action: action_chitchat
+      - action: utter_stop
+      - intent: dismiss_stop
+      - action: health_form
+      - active_loop: health_form
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - slot_was_set:
+          - requested_slot: health_form_answer
+      - slot_was_set:
+          - health_form_answer: null
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_show_answers
+      - action: action_listen
+      - slot_was_set:
+          - alarming_metrics:
+              - lack of sleep
+              - fatigue
+      - action: action_show_article_for_alarming_metrics

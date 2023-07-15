@@ -1,0 +1,31 @@
+version: "3.0"
+stories:
+  - story: interactive_story_2
+    steps:
+      - intent: choose_article_topic
+        entities:
+          - topic: weight
+      - slot_was_set:
+          - topic: weight
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/health-conditions/diabetes/watch-your-weight
+      - intent: thankyou
+      - action: utter_noworries
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: interactive_story_11
+    steps:
+      - intent: view_article_types
+      - action: utter_show_article_topics
+      - intent: choose_article_topic
+        entities:
+          - topic: weight
+      - slot_was_set:
+          - topic: weight
+      - action: action_provide_article
+      - slot_was_set:
+          - article_url: https://health.gov/myhealthfinder/health-conditions/diabetes/losing-weight-conversation-starters
+      - intent: thankyou
+      - action: utter_noworries

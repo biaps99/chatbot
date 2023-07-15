@@ -1,0 +1,334 @@
+version: "3.0"
+nlu:
+  - intent: check_progress
+    examples: |
+      - Show me the objectives framework, please.
+      - objectives table
+      - goals
+      - objectives
+      - My goals
+      - Show me my goals, please.
+      - Show me my progress, please.
+      - View progress.
+      - Goal status.
+      - Progress status.
+      - progress
+      - My progress
+      - Can you show me my progress?
+      - My tasks.
+      - Show me my daily tasks, please.
+      - Can I view my daily progress?
+      - Check tasks.
+      - show me my goals
+      - status of objectives
+      - show goals
+      - show objetives
+      - view goals
+
+  - intent: refuse_help
+    examples: |
+      - Don't need any help.
+      - not necessary.
+      - Dont need any help.
+      - I'm fine, no need for help.
+      - I'll work myself around.
+      - No need.
+      - I can do it by myself.
+      - Leave it.
+      - No need, thanks
+      - No, i dont want any help.
+
+  - intent: refuse_health_questionnaire
+    examples: |
+      - No, answer later.
+      - No, not now.
+      - No, leave the questionnaire for later.
+      - No, leave it for later.
+
+  - intent: say_yes_to_health_questionnaire
+    examples: |
+      - Yes, let's fill the health questionnaire.
+      - Yes, let's go.
+      - Yes, let's answer the questionnaire now.
+      - Yes, let's answer now.
+
+  - intent: ask_about_weight
+    examples: |
+      - Ways to [lose weight](topic) and keep it off?
+      - How can I [lose weight](topic)?
+      - Is [losing weight](topic) important?
+      - How can I achieve [weight loss](topic)?
+      - How can [losing weight](topic) improve my health condition?
+      - What can [losing weight](topic) do for me?
+      - Why should you [lose weight](topic) if you have diabetes?
+      - Could a [weight loss](topic) program help me?
+      - What type of [weight loss](topic) program would you recommend for me?
+      - Do I have a health problem that's causing me to be [overweight](topic)?
+      - What are the risks of [being overweight](topic)?
+      - What are the problems of [being overweight](topic)?
+      - How [being overweight](topic) affects my wellbeing?
+      - How can I maintain a [healthy weight](topic)?
+      - How to stay at a [healthy weight](topic)?
+      - Ways of having a [healthy weight](topic).
+      - How can I know if I have a [healthy weight](topic)?
+      - Do I have a [healthy weight](topic)?
+      - What is the importance of [weight](topic) in diabetes?
+
+  - intent: ask_about_blood_pressure
+    examples: |
+      - How often do I need to get my [blood pressure](topic) checked?
+      - What puts me at higher risk for [high blood pressure](topic)?
+      - What is [blood pressure](topic)?
+      - What is [hypertension](topic)?
+      - What do [blood pressure numbers](topic) mean?
+      - How can I get my [blood pressure checked](topic)?
+      - Can I [check my blood pressure](topic) by myself?
+      - What if I have [high blood pressure](topic)?
+      - How does [high](topic) [blood pressure](topic) affect my health?
+      - what are the consequences of [high](topic) [blood pressure](topic)?
+
+  - intent: ask_about_exercise
+    examples: |
+      - What are the the benefits of [exercise](topic) in diabetes?
+      - What is the importance of [physical activity](topic) in management of diabetes?
+      - [Physical activity](topic) and diabetes.
+      - The role of [exercise](topic).
+      - so should I do [exercise](topic) regularly?
+      - what is the importance of [physical exercise](topic)?
+      - What's a good amount of [exercise](topic)?
+      - How much [exercise](topic) is recomended?
+      - How much [exercise](topic) should I be getting?
+      - Is walking once a day enough [exercise](topic)?
+      - How much [exercise](topic) should i do every day?
+
+  - intent: ask_about_nutrition
+    examples: |
+      - What are the the benefits of a [healthy diet](topic) in diabetes?
+      - What is a [healthy diet](topic) for diabetes?
+      - Tips for a [healthy nutrition](topic).
+      - what [diet](topic) should I have?
+      - What's considered a [healthy diet](topic)?
+      - What's considered a [good diet](topic)?
+      - How do I follow a [healthy diet](topic)?
+      - What's an example of a [healthy diet](topic)?
+      - How do I [eat healthy](topic)?
+
+  - intent: ask_about_glucose
+    examples: |
+      - What should my [blood sugar](topic) be?
+      - What is an [A1c](topic)?
+      - Why does it matter if my [blood sugar](topic) is 120 or 200?
+      - Why do [glucose levels](topic) matter?
+      - why is [glucose measurement](topic) important?
+      - What is [glucose](topic)?
+      - What is [blood sugar](topic)?
+
+  - intent: ask_help_in_tasks
+    examples: |
+      - Can you help achieve my remaining goals?
+      - Can you assist to accomplish my goals?
+      - Help in objectives.
+      - Help in tasks?
+      - Any help to achieve the goals?
+      - Help complete the tasks.
+      - Task assistance.
+      - help with ma goals
+      - Give me some assistance to achieve my remaining goals
+      - Give me a hand, please.
+      - I'm finding it difficult to complete my objectives
+      - It's hard to complete the goals.
+
+  - intent: show_wellness_check
+    examples: |
+      - Wellness check.
+      - Time for wellness check.
+      - Show health form.
+      - Do health check.
+      - Show health questionnaire.
+      - health questionaire
+      - wellness form
+      - health form
+      - questionnaire
+      - questionaire
+
+  - intent: answer_wellness_check
+    examples: |
+      - [low](health_form_answer)
+      - [Low](health_form_answer)
+      - [High](health_form_answer)
+      - [Medium](health_form_answer)
+      - [Less than 6 hours](health_form_answer)
+      - [12 hours](health_form_answer)
+      - [medium](health_form_answer)
+      - [high](health_form_answer)
+      - [4 hours](health_form_answer)
+      - [More than 6 hours](health_form_answer)
+      - [very high](health_form_answer)
+      - [Yes](health_form_answer)
+      - [No](health_form_answer)
+      - [no](health_form_answer)
+      - [yes](health_form_answer)
+
+  - intent: stop
+    examples: |
+      - stop
+      - please stop
+      - i want to stop
+      - stop the form
+      - stop form
+      - stop questionnaire
+      - stop the questions
+
+  - intent: confirm_stop
+    examples: |
+      - Yes, I wanna stop the questionnaire.
+      - Yes, I want to stop the questionnaire.
+
+  - intent: dismiss_stop
+    examples: |
+      - No, let's fill the health questionnaire.
+      - No, let's continue the questionnaire.
+      - No, I want to continue the form.
+      - No, continue.
+      - No, I want to continue to answer the questions.
+
+  - intent: input_some_measurement
+    examples: |
+      - [80 kg](measurement).
+      - [70 kg](measurement).
+      - [60 kg](measurement).
+      - [50 kg](measurement).
+      - [86 kg](measurement).
+      - My weight is [60 kg](measurement).
+      - My weight today is [90 kg](measurement).
+      - My weight today is [80 kg](measurement).
+      - Today I weight [80 kg](measurement).
+      - My glucose value today was [200 mg/dl](measurement).
+      - My glucose value: [170 mg/dl](measurement).
+      - value for glucose: [180 mg/dl](measurement).
+      - [210 mg/dl](measurement).
+      - [76 mg/mol](measurement).
+      - my glucose value: [170 mg/dl](measurement).
+      - [90 mg/dl](measurement).
+      - [80 mg/dl](measurement).
+      - [100 mg/dl](measurement).
+      - [70 mm/Hg](measurement) .
+      - [120 mm/Hg](measurement)
+      - My blood preassure was [110 mm/Hg](measurement)
+      - [2 mg/dl](measurement)
+      - [110 mm/Hg](measurement) 
+      - [80 mm/Hg](measurement)
+      - [70 mm/Hg](measurement)
+      - [90 mg/dl](measurement).
+      - [90 mg/mol](measurement)
+      - [120 mg/dl](measurement).
+      - [50 pounds](measurement).
+      - [90 Pa](measurement).
+      - [79 lb](measurement).
+
+  - intent: weight_update
+    examples: |
+      - [weight](update) update
+      - give me [weight](update) information
+      - [weight](update) please
+      - [weight](update) update
+
+  - intent: number_measurements
+    examples: |
+      - [5 measurements](number_of_measurements).
+      - I did [4 measurements](number_of_measurements) today.
+      - [4 measurements](number_of_measurements).
+      - [2 measurements](number_of_measurements).
+      - [1 measurement](number_of_measurements).
+      - I did [3 measurements](number_of_measurements) today.
+      - I did only [1 measurement](number_of_measurements) today.
+
+  - intent: doHere
+    examples: |
+      - I prefer to update my glucose measurements here.
+      - I want to write my glucose measurement values here.
+      - I would like to my glucose update here
+      - I prefer to update my blood preassure measurements here.
+      - I want to write my blood preassure measurement values here.
+      - I would like to update blood preassure here
+      - I want to write my weight measurement values here.
+      - I would like to update my weight measurement values here
+      - I want to update my weight measurements status here.
+      - Do it here.
+
+  - intent: glucose_update
+    examples: |
+      - [glucose](update) update
+      - give me [glucose](update) update information
+      - [glucose](update) update please
+      - [blood sugar](update) update.
+      - update [blood sugar](update) status here.
+
+  - intent: blood_update
+    examples: |
+      - [blood pressure](update) update
+      - give me [blood pressure](update) information
+      - [blood pressure](update) please
+      - [blood pressure](update) update
+      - [pressure](update) update.
+      - [arterial pressure](update) update.
+      - do a [blood pressure](update) update
+      - update [blood pressure](update) value.
+      - update [blood pressure](update)
+
+  - intent: willDo
+    examples: |
+      - I will do it shortly.
+      - I will update.
+      - OK. I will update in Promptly's App.
+      - Will do.
+      - I will update in Promptly's App.
+
+  - synonym: glucose
+    examples: |
+      - blood sugar
+      - glycaemia
+
+  - synonym: diet
+    examples: |
+      - nutrition
+
+  - synonym: management
+    examples: |
+      - control
+      - regulation
+      - supervision
+      - surveillance
+
+  - synonym: goals
+    examples: |
+      - tasks
+      - objectives
+
+  - synonym: article
+    examples: |
+      - paper
+      - journal
+      - publication
+
+  - synonym: exercise
+    examples: |
+      - physical activity
+      - gym
+      - walk
+      - training
+      - run
+
+  - synonym: high blood pressure
+    examples: |
+      - hypertension
+
+  - synonym: high blood sugar
+    examples: |
+      - hyperglycemia
+      - hyperglycaemia
+
+  - synonym: low blood sugar
+    examples: |
+      - hypoglycemia
+      - hypoglycaemia
